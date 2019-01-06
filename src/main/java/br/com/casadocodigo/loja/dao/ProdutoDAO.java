@@ -1,7 +1,15 @@
 package br.com.casadocodigo.loja.dao;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,4 +49,26 @@ public class ProdutoDAO {
 	    query.setParameter("tipoPreco", tipoPreco);
 	    return query.getSingleResult();
 	}
+
+	public List<Produto> relatorioPorData(Calendar date) {
+		
+		List<Produto> produtos = manager.createQuery("select distinct(p) from Produto p join fetch p.precos "
+				+ "where p.dataLancamento >= :data" , Produto.class ).setParameter("data", date).getResultList();	
+		
+		return produtos;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

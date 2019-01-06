@@ -1,9 +1,13 @@
 package br.com.casadocodigo.loja.models;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
+
+
 
 @Entity
 public class Role implements GrantedAuthority{
@@ -32,4 +36,25 @@ public class Role implements GrantedAuthority{
 	public String getAuthority() {
 		return this.nome;
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(nome, role.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
+    }
+
+	
+	
 }

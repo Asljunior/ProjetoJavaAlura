@@ -115,5 +115,7 @@ public class Produto implements Serializable{
 		return precos.stream().filter(preco -> preco.getTipo().equals(tipoPreco))
 				.findFirst().get().getValor();
 	}
+	
+	
 
 }
